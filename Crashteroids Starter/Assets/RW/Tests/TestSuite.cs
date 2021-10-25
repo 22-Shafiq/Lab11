@@ -10,13 +10,25 @@ namespace Tests
     {
         private Game game;
 
-        [UnityTest]
-        public IEnumerator AsteroidsMoveDown()
+        [SetUp]
+        public void Setup()
         {
-            // 2
             GameObject gameGameObject =
                 MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
             game = gameGameObject.GetComponent<Game>();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            Object.Destroy(game.gameObject);
+        }
+
+
+
+        [UnityTest]
+        public IEnumerator AsteroidsMoveDown()
+        {          
             // 3
             GameObject asteroid = game.GetSpawner().SpawnAsteroid();
             // 4
@@ -32,9 +44,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator GameOverOccursOnAsteroidCollision()
         {
-            GameObject gameGameObject =
-               MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
-            Game game = gameGameObject.GetComponent<Game>();
+           
             GameObject asteroid = game.GetSpawner().SpawnAsteroid();
             //1
             asteroid.transform.position = game.GetShip().transform.position;
