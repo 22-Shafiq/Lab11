@@ -67,6 +67,5 @@ namespace Tests
             Assert.False(game.isGameOver);
             yield return null;
         }
-
     }
 }
